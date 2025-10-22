@@ -29,12 +29,12 @@ int main(void)
 	ZfDriver::Install();
 
 	// Test
-	//DWORD num = 1;
-	//std::cout << ZfDriver::Test(num) << std::endl;
+	DWORD num = 1;
+	std::cout << ZfDriver::Test(num) << std::endl;
 
-	//// Read
-	//ZfDriver::ReadBytes(5692, 0x000C6F38, sizeof(DWORD), (BYTE*)&num);
-	//std::cout << num << std::endl;
+	// Read
+	ZfDriver::ReadBytes(11692, 0x000C6F38, sizeof(DWORD), (BYTE*)&num);
+	std::cout << num << std::endl;
 
 	//// Write
 	//num--;

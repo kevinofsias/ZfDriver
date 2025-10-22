@@ -26,7 +26,7 @@ BOOL ZfDriver::Install()
 	WCHAR sysPath[MAX_PATH] = { 0 };
 	Utils::GetAppPath(sysPath);
 	wcscat_s(sysPath, DRIVER_FILE_NAME);
-	if (!Utils::ReleaseResource(IDR_SYS1, L"SYS", DRIVER_FILE_NAME))
+	if (!Utils::ReleaseResource(IDR_SYS1, L"SYS", sysPath))
 		return FALSE;
 	if (!gDriverController.Install(sysPath, DRIVER_SERVICE_NAME, DRIVER_SERVICE_NAME))
 	{

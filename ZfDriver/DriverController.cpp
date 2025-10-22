@@ -50,13 +50,16 @@ BOOL DriverController::Install(PCWSTR sysPath, PCWSTR serviceName, PCWSTR displa
 		);
 		if (service_ == NULL)
 		{
+			DWORD ErrorCode = GetLastError();
 			Close();
 			Stop();
 			Uninstall();
 
 			CloseServiceHandle(service_);
 			CloseServiceHandle(scManager_);
-			//Utils::AlertError(L"Create Service Error! Please Reopen it.");
+			WCHAR szBuffer[100];
+			wsprintf(szBuffer, L"Create Service Error! Please Reopen it. Error Code %u", ErrorCode);
+			Utils::AlertError(szBuffer);
 			break;
 		}
 		return true;
@@ -69,7 +72,10 @@ BOOL DriverController::Start()
 {
 	if (!StartService(service_, NULL, NULL))
 	{
-		Utils::AlertError(L"Start Driver Error!");
+		DWORD ErrorCode = GetLastError();
+		WCHAR szBuffer[100];
+		wsprintf(szBuffer, L"Start Driver Error! Error Code %u", ErrorCode);
+		Utils::AlertError(szBuffer);
 		return false;
 	}
 	return true;
